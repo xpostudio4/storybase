@@ -36,7 +36,7 @@ class BadgeResourceTest(ResourceTestCase):
 
         objects = self.deserialize(response)['objects']
 
-        self.assertEquals(len(objects), 5)
+        self.assertEquals(len(objects), 6)
         self.assertEquals(objects[0], {
             u'description': u'Stories promoted by the Denver Foundation Staff.',
             u'icon_uri': '/static/img/badges/denver-foundation.png',
@@ -77,7 +77,6 @@ class BadgeResourceTest(ResourceTestCase):
         self.api_client.patch(self.badge_uri, data={
             'stories': [self.story_uri]
         }, authentication=self.get_credentials())
-
         self.assertIn(self.badge, self.story.badges.all())
 
     def test_remove_badge_from_story(self):
