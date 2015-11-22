@@ -7,7 +7,7 @@ from tastypie.test import ResourceTestCase, TestApiClient
 
 from storybase_story.models import create_story
 from storybase_taxonomy.models import (Category, CategoryTranslation, Tag,
-                                       create_category)
+                                       create_category, create_categories)
 
 class CategoryModelTest(TestCase):
     """Test the Category model"""
@@ -31,7 +31,14 @@ class CategoryApiTest(TestCase):
         self.assertEqual(category.slug, slug)
 
     def test_create_categories(self):
-        self.fail('Implement me')
+        names = [ "Technology", "Social Life", "Travel"]
+        categories = create_categories(names)
+        self.assertEqual(categories[0].name, "Technology")
+        self.assertEqual(categories[1].name, "Social Life")
+        self.assertEqual(categories[2].name, "Travel")
+        self.assertEqual(categories[0].slug, "technology")
+        self.assertEqual(categories[1].slug, "social-life")
+        self.assertEqual(categories[2].slug, "travel")
 
 
 class TagResourceTest(ResourceTestCase):
