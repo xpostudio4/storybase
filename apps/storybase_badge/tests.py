@@ -38,7 +38,7 @@ class BadgeResourceTest(ResourceTestCase):
 
         self.assertEquals(len(objects), 6)
         self.assertEquals(objects[0], {
-            u'description': u'Stories promoted by the Denver Foundation Staff.',
+            u'description': u'The Denver Foundation funded this through our Community Endowment. The Denver Foundation inspires people and mobilizes resources to strengthen our community. Since 1925, the Foundation has helped generous people like you to be catalysts for good by building charitable legacies.',
             u'icon_uri': '/static/img/badges/denver-foundation.png',
             u'id': 1,
             u'name': u'Denver Foundation',
@@ -84,11 +84,9 @@ class BadgeResourceTest(ResourceTestCase):
         self.assertNotIn(self.story, self.badge.stories.all())
         self.badge.stories.add(self.story)
         self.assertIn(self.story, self.badge.stories.all())
-
         response = self.api_client.patch(self.badge_uri, data={
             'stories': []
         }, authentication=self.get_credentials())
-
         self.assertHttpOK(response)
 
         self.assertNotIn(self.story, self.badge.stories.all())
