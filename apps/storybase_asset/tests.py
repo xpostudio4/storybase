@@ -257,7 +257,7 @@ class ExternalAssetModelTest(TestCase):
         response_data = ExternalAsset.get_oembed_response(url)
         self.assertIn('html', response_data)
         # Short URL
-        url = 'http://snd.sc/18NoosH'
+        url = 'http://snd.sc/l2sPQe'
         response_data = ExternalAsset.get_oembed_response(url)
         self.assertIn('html', response_data)
 
