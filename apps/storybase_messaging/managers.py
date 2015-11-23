@@ -35,7 +35,7 @@ class EmailMessageList(list):
         return (sent, unsent)
 
 
-class StoryNotificationQuerySet(models.query.QuerySet):
+class StoryNotificationQuerySet(models.QuerySet):
     def unsent(self):
         return self.filter(sent=None)
 
@@ -63,7 +63,7 @@ class StoryNotificationQuerySet(models.query.QuerySet):
 
 
 class StoryNotificationManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return StoryNotificationQuerySet(self.model, using=self._db)
 
     def send_emails(self, send_on=None):
@@ -79,7 +79,7 @@ class StoryNotificationManager(models.Manager):
                     before this field, consider it ready to send.
                     Defaults to ``datetime.now()``.
         """
-        qs = self.get_query_set().ready_to_send(send_on)
+        qs = self.get_queryset().ready_to_send(send_on)
         (sent, unsent) = qs.emails().send()
         qs.update(sent=datetime.now())
         return (sent, unsent)
