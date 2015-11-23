@@ -1882,7 +1882,8 @@ class AssetResourceTest(DataUrlMixin, FileCleanupMixin, ResourceTestCase):
         self.assertHttpAccepted(resp)
         self.assertEqual(self.deserialize(resp)['caption'], put_data['caption'])
         updated_asset = Asset.objects.get(asset_id=asset.asset_id)
-        self.assertEqual(updated_asset.caption, put_data['caption'])
+        asset_translation = HtmlAssetTranslation.objects.get(asset=updated_asset)
+        self.assertEqual(asset_translation.caption, put_data['caption'])
         self.assertEqual(Asset.objects.count(), 1)
         self.assertEqual(HtmlAssetTranslation.objects.count(), 1)
 
